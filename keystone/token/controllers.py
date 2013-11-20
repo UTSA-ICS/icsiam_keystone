@@ -11,7 +11,7 @@ from keystone import config
 from keystone import exception
 from keystone.openstack.common import timeutils
 from keystone.token import core
-from keustone.aws import aws_federated_token
+from keystone.aws import aws_federated_token
 
 CONF = config.CONF
 LOG = logging.getLogger(__name__)
@@ -145,7 +145,7 @@ class Auth(controller.V2Controller):
                 raise e
 
         #token_data['access']['token']['id'] = token_id
-        token_data['access']['token']['id'] = aws_federated_token.generate_user_token(context)
+        token_data['access']['token']['id'] = aws_federated_token.generate_sts_token()
 
         return token_data
 
