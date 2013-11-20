@@ -144,8 +144,11 @@ class Auth(controller.V2Controller):
             except exception.TokenNotFound:
                 raise e
 
-        #token_data['access']['token']['id'] = token_id
-        token_data['access']['token']['id'] = aws_federated_token.generate_sts_token()
+        token_data['access']['token']['id'] = token_id
+	credential = aws_federated_token.generate_sts_token()
+        token_data['access']['token']['access_key'] = credential.access_key
+        token_data['access']['token']['secret_key'] = credential.secret_key
+        token_data['access']['token']['session_token'] = credential.session_token
 
         return token_data
 
