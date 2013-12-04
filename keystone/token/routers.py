@@ -24,6 +24,10 @@ class Router(wsgi.ComposableRouter):
                        controller=token_controller,
                        action='authenticate',
                        conditions=dict(method=['POST']))
+        mapper.connect('/tokens_aws',
+                       controller=token_controller,
+                       action='authenticate_aws',
+                       conditions=dict(method=['POST']))
         mapper.connect('/tokens/revoked',
                        controller=token_controller,
                        action='revocation_list',
